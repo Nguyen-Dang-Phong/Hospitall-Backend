@@ -1,4 +1,5 @@
 import dt from '../models/index'
+import CRUDService from '../services/CRUDservice'
 let getHomePage = async (req, res) => {
     try {
         let data = await dt.User.findAll()
@@ -15,7 +16,17 @@ let getHomePage = async (req, res) => {
 let getAbout = (req, res) => {
     return res.render('test/about.ejs');
 }
+let getCRUD = (req, res) => {
+    return res.render('crud.ejs');
+}
+let postCRUD = async (req, res) => {
+    let messange = await CRUDService.createNewUser(req.body)
+    console.log(messange)
+    return res.send('post crud');
+}
 module.exports = {
     getHomePage: getHomePage,
-    getAbout: getAbout
+    getAbout: getAbout,
+    getCRUD: getCRUD,
+    postCRUD: postCRUD
 }
