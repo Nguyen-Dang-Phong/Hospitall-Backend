@@ -7,10 +7,13 @@ module.exports = {
       password: '12345',
       firstName: 'John',
       lastName: 'Doe',
-      gender: 1,
-      typeRole: 'ROL',
-      keyRole: 'R1',
+      address: 'hcm',
+      phonenumber: '0989898989',
 
+      gender: 1,
+      image: 'ROL',
+      roleId: 'R1',
+      positionId: 'hb',
 
 
       createdAt: new Date(),
