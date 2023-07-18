@@ -31,11 +31,37 @@ let displayGetCRUD = async (req, res) => {
         data
     });
 }
+let getEditCRUD = async (req, res) => {
+    // Lay id tren url
+    let userId = req.query.id
+    if (userId) {
+        let userData = await CRUDService.getUserInforById(userId);
+        console.log(userData)
+        return res.render('editCRUD', { userData })
+    } else {
+        return res.send('not found')
+
+    }
+
+}
+let putCRUD = async (req, res) => {
+    // Lay id tren url
+    let data = req.body
+    let allUsers = await CRUDService.updateUserData(data)
+    return res.render('displayCRUD.ejs', {
+        data: allUsers
+    });
+    // return res.send('not found')
+
+
+}
 
 module.exports = {
     getHomePage: getHomePage,
     getAbout: getAbout,
     getCRUD: getCRUD,
     postCRUD: postCRUD,
-    displayGetCRUD: displayGetCRUD
+    displayGetCRUD: displayGetCRUD,
+    getEditCRUD: getEditCRUD,
+    putCRUD: putCRUD
 }

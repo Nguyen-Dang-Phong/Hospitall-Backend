@@ -45,11 +45,57 @@ let getAllUsers = () => {
             reject(error)
         }
     })
+}
+let getUserInforById = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let userInforById = await dt.User.findOne({
+                where: { id: userId },
+                raw: true
+            })
+            if (userInforById) {
+                resolve(userInforById)
+
+            } else {
+                resolve({})
+
+            }
+        } catch (error) {
+            reject(error)
+        }
+    })
+
+}
+let updateUserData = (data) => {
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            let user = await dt.User.findOne({
+                where: { id: data.id }
+            })
+            if (user) {
+                user.firstName = data.firstName;
+                user.lastName = data.lastName;
+                user.address = data.address;
+                await user.save();
+                let allUsers = await dt.User.findAll()
+                resolve(allUsers)
+
+            } else {
+                resolve()
+
+            }
+        } catch (error) {
+            reject(error)
+        }
+    })
 
 }
 module.exports = {
     createNewUser: createNewUser,
     hashUserPassword: hashUserPassword,
-    getAllUsers: getAllUsers
+    getAllUsers: getAllUsers,
+    getUserInforById: getUserInforById,
+    updateUserData: updateUserData
 
 }
