@@ -29,12 +29,27 @@ let hashUserPassword = (password) => {
             let hashPassword = await bcrypt.hashSync(password, salt);
             resolve(hashPassword)
         } catch (error) {
-            reject(e)
+            reject(error)
+        }
+    })
+
+}
+let getAllUsers = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let users = await dt.User.findAll({
+                raw: true
+            })
+            resolve(users)
+        } catch (error) {
+            reject(error)
         }
     })
 
 }
 module.exports = {
     createNewUser: createNewUser,
-    hashUserPassword: hashUserPassword
+    hashUserPassword: hashUserPassword,
+    getAllUsers: getAllUsers
+
 }
