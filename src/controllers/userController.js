@@ -13,7 +13,7 @@ let handleLogin = async (req, res) => {
     return res.status(200).json({
         errCode: userData.errCode,
         messange: userData.errMessage,
-        user: userData.user ? userData.user : { phong: 9 }
+        user: userData.user ? userData.user : {}
     })
 }
 module.exports = {
