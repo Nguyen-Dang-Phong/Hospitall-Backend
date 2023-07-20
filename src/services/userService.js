@@ -43,7 +43,7 @@ let handleUserLogin = (email, password) => {
 let checkUserEmail = (userEmail) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let user = await db.findOne({
+            let user = await dt.User.findOne({
                 where: { email: userEmail }
             })
             if (user) {
@@ -52,7 +52,7 @@ let checkUserEmail = (userEmail) => {
                 resolve(false)
             }
         } catch (error) {
-            resolve(error)
+            reject(error)
         }
     })
 }
