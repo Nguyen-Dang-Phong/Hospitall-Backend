@@ -189,10 +189,29 @@ let editUser = (data) => {
         }
     })
 }
+let getAllCodeService = (typeInput) => {
+    return new Promise(async (resolve, reject) => {
+        if (!typeInput) {
+            resolve({
+                errCode: 1,
+                errMessage: "Missing required parameters!"
+            })
+        } else {
+            let res = {};
+            let allcode = await dt.allcode.findAll({
+                where: { type: typeInput }
+            })
+            res.errCode = 0;
+            res.data = allcode;
+            resolve(res)
+        }
+    })
+}
 module.exports = {
     handleUserLogin: handleUserLogin,
     getAllUsers: getAllUsers,
     createNewUser: createNewUser,
     deleteUser: deleteUser,
-    editUser: editUser
+    editUser: editUser,
+    getAllCodeService: getAllCodeService
 }
